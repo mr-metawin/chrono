@@ -1,0 +1,11 @@
+{
+  "address": "0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b",
+  "chainId": 968,
+  "network": "BOT Testnet",
+  "txHash": "0xd36006e94a5b1b80e1a933e662ad87c17176c11e5951716a51ed9ddf930b728c",
+  "explorerUrl": "https://scan.bohr.life/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b",
+  "penaltyRecipient": "0x44c0B36FA1a67eec472fF0AB032eC066847AAE1d",
+  "penaltyBps": 1000,
+  "minLockSeconds": 120,
+  "maxLockSeconds": 157680000
+}

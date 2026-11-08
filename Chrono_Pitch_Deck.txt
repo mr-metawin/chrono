@@ -1,0 +1,202 @@
+================================================================================
+                                   CHRONO
+                 Time-locked. Temptation-proof Savings Vault
+                             on the BOT Network
+================================================================================
+
+PITCH DECK | NOVEMBER 2026
+
+--------------------------------------------------------------------------------
+SLIDE 1: COVER & EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+Project Name : Chrono
+Tagline      : Time-locked. Temptation-proof.
+Network      : BOT Testnet (Chain ID: 968)
+RPC Endpoint : https://rpc.bohr.life
+Explorer     : https://scan.bohr.life
+Native Token : BOT (18 Decimals)
+Contract     : 0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b
+Deploy Tx    : 0xd36006e94a5b1b80e1a933e662ad87c17176c11e5951716a51ed9ddf930b728c
+
+EXECUTIVE SUMMARY:
+Chrono is an immutable onchain savings protocol engineered natively for the BOT
+blockchain ecosystem. Built with pure Solidity (^0.8.24) and OpenZeppelin 5.x
+primitives, Chrono solves the "hyper-liquidity temptation" dilemma of Web3 by
+allowing users to lock native BOT until a specified future date.
+
+Positions are strictly isolated, featuring custom labels, flexible or strict
+exit modes, and mathematical finality. There are zero admin backdoors, no owner
+roles, no pause toggles, and no upgradeable proxies. Once committed in Strict mode,
+neither the user, nor any attacker, nor the contract deployer can access funds
+prior to the unlock timestamp.
+
+--------------------------------------------------------------------------------
+SLIDE 2: THE PROBLEM - THE HYPER-LIQUIDITY DILEMMA
+--------------------------------------------------------------------------------
+In modern Web3, extreme liquidity is both a gift and a psychological curse:
+
+1. Instant Temptation & Paper Hands:
+   - 24/7 crypto markets and instant DEX liquidity drive emotional panic-selling,
+     impulsive leverage trading, and failure to accumulate long-term wealth.
+
+2. Yield Protocol & Bridge Fragility:
+   - Conventional "staking" platforms expose users to impermanent loss, smart
+     contract upgrade vulnerabilities, governance attacks, and bridge exploits.
+     Users seeking simple, safe savings are forced into risky yield games.
+
+3. Lack of True Self-Commitment Mechanisms:
+   - Behavioral finance shows that human self-control fails without strict external
+     commitment devices. Traditional banking solutions gate accounts with red tape
+     or extract predatory fees, while crypto wallets offer zero native lockup tooling.
+
+4. Token Velocity Pressure on BOT:
+   - Without native time-locking primitives, native tokens suffer from high velocity
+     and erratic market churn during market volatility.
+
+--------------------------------------------------------------------------------
+SLIDE 3: THE SOLUTION - CHRONO
+--------------------------------------------------------------------------------
+Chrono introduces trustless, programmatic time-locking directly on the BOT blockchain:
+
+- Strict Mode (Default):
+  - Pure mathematical self-commitment. Once locked, funds cannot be withdrawn under
+    any circumstance before block.timestamp >= unlockTime.
+  - Zero admin overrides, zero emergency loopholes.
+
+- Flexible Mode:
+  - Emergency safety valve. Users can exit early if truly necessary by paying a
+    pre-configured 10% penalty (1000 bps) credited to protocol penalties.
+  - Transparent, automated, and strictly onchain.
+
+- 100% Free at Unlock:
+  - After unlockTime, 100% of the locked BOT is withdrawable by the owner with 0% fee.
+
+- Pure Onchain Simplicity:
+  - No backend, no IPFS pinning, no centralized database, and no oracle reliance.
+    All lock data is stored directly in contract storage as plain UTF-8 strings.
+
+--------------------------------------------------------------------------------
+SLIDE 4: MARKET OPPORTUNITY & TARGET AUDIENCE
+--------------------------------------------------------------------------------
+Total Addressable Market (TAM):
+Global personal savings, Web3 treasury management, and DeFi self-discipline devices.
+
+Target Customer Segments:
+
+1. Long-Term HODLers & Crypto Accumulators:
+   - Savers locking BOT for 6 months, 1 year, or 5 years to build generational wealth
+     free from daily market noise.
+
+2. Web3 Founders, DAOs & Ecosystem Treasuries:
+   - Lightweight milestone vesting, team savings, and committed runway locks.
+
+3. Retail Savers & Goal Accumulators:
+   - Vacation funds, tax preparation reserves, real-estate deposits, and milestone
+     savings.
+
+4. BOT Ecosystem Multiplier:
+   - Every lock removes circulating BOT from the secondary market, reducing sell
+     pressure and aligning community participants with the long-term health of BOT.
+
+--------------------------------------------------------------------------------
+SLIDE 5: ARCHITECTURE & PRODUCT DESIGN
+--------------------------------------------------------------------------------
+Smart Contract: Chrono.sol (Solidity ^0.8.24)
+- Uses OpenZeppelin Contracts v5.x ReentrancyGuard.
+- Checks-Effects-Interactions (CEI) strictly enforced: state mutated and events emitted
+  before native value transfers.
+- No receive() or fallback() methods: plain ETH/BOT transfers automatically revert.
+- Custom Errors: Gas-efficient custom error definitions throughout.
+
+Frontend Interface:
+- Single-page application built with Vite, React 18, TypeScript, and viem.
+- Modern "Vault and Time" dark aesthetic with deep indigo/violet hues and glassmorphic cards.
+- Live Features:
+  - Dynamic SVG circular progress rings showing real-time elapsed lock percentages.
+  - Live second-by-second countdown timers.
+  - Role-aware card actions: Add More BOT, Extend Lock, Exit Early (Flexible), Withdraw (Unlocked).
+  - Deep linking and onchain inspection via hash routing (#/lock/:id).
+  - Automatic blockchain timestamp calibration to prevent local device clock drift.
+
+--------------------------------------------------------------------------------
+SLIDE 6: TOKENOMICS & ECONOMIC MODEL
+--------------------------------------------------------------------------------
+1. Native Currency Exclusivity:
+   - Operates natively in BOT. Zero synthetic wrapped tokens, zero secondary tokens,
+     zero inflationary minting.
+
+2. The 10% Early-Exit Safety Valve:
+   - Users opting for Flexible mode accept a 10% penalty on early exit.
+   - Penalty calculation enforces mathematical rounding-up:
+     penalty = (amount * penaltyBps + 9999) / 10000; payout = amount - penalty.
+   - Payout + Penalty always strictly equals the original locked principal.
+
+3. Solvency & Conservation Invariant:
+   - Contract balance strictly equals:
+     totalLocked + penaltyBalance
+   - Invariant verified through 128,000 automated calls across 256 fuzz runs with zero reverts.
+
+--------------------------------------------------------------------------------
+SLIDE 7: SECURITY & VERIFICATION BENCHMARK
+--------------------------------------------------------------------------------
+Rigorous Foundry Testing Suite:
+Total 38 Tests Passing (37 Unit/Fuzz + 1 Invariant)
+
+1. Exact Timestamp Boundary Verification:
+   - unlockTime - 1 second: MUST revert (LockStillActive).
+   - unlockTime: MUST succeed.
+
+2. Malicious Attack Vectors Blocked:
+   - Reentrant attacker contracts attempting recursive withdraw(), exitEarly(), and
+     claimPenalties() calls are completely blocked by ReentrancyGuard.
+   - Rejecting receiver contracts revert safely without affecting any other vault user.
+
+3. No Double Settlement:
+   - Settled locks (Withdrawn / ExitedEarly) reject any top-up, extension, or re-withdrawal.
+
+4. Immutability Guarantee:
+   - No owner keys, no upgradeability proxies, no pause modifiers.
+
+--------------------------------------------------------------------------------
+SLIDE 8: ROADMAP & TRACTION
+--------------------------------------------------------------------------------
+Q4 2026 (Completed):
+[x] Vault smart contract architecture finalized & audited internally.
+[x] Comprehensive Foundry test suite passed (38/38 tests).
+[x] Deployed to BOT Testnet (Chain ID 968) at 0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b.
+[x] Polished React + Vite + TypeScript frontend running live with custom chain integration.
+
+Q1 2027:
+[ ] Formal external third-party security audit.
+[ ] Mobile responsive optimizations & Web3 wallet browser deep integrations.
+[ ] Community launch on BOT Mainnet (Chain ID 677).
+
+Q2 2027:
+[ ] Chrono SDK for third-party dapps, DAOs, and wallet developers.
+[ ] Social savings pools & collaborative non-custodial milestone vaults.
+
+--------------------------------------------------------------------------------
+SLIDE 9: COMPETITIVE ADVANTAGES
+--------------------------------------------------------------------------------
+Feature               | Chrono         | Yield Protocols | Traditional Banks
+----------------------+----------------+-----------------+------------------
+Early Exit Control    | Strict / Flex  | Usually Liquid  | Penalties & Red Tape
+Smart Contract Risk   | Minimal (Pure) | High (Upgrades) | N/A (Centralized)
+Admin Backdoors       | None (0%)      | Multi-sig Pause | Full Bank Control
+User Sovereignty      | Complete       | Governance Risk | KYC / Asset Seizure
+Storage Dependency    | 100% Onchain   | IPFS / Indexes  | Proprietary DB
+
+--------------------------------------------------------------------------------
+SLIDE 10: CALL TO ACTION & ECOSYSTEM CONTACT
+--------------------------------------------------------------------------------
+Lock your BOT today. Remove temptation. Build the future.
+
+- Dapp URL     : http://localhost:5174
+- Explorer     : https://scan.bohr.life/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b
+- Chain ID     : 968 (BOT Testnet)
+- RPC Endpoint : https://rpc.bohr.life
+- Tagline      : "Time-locked. Temptation-proof."
+
+================================================================================
+                                CHRONO 2026
+================================================================================

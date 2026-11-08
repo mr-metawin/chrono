@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- BOT Chain Logo - Scalable Vector Representation -->
+  <g fill="#10A37F">
+    <!-- Top Ribbon -->
+    <polygon points="75,29.5 140,67 140,92.5 118.5,79.5 75,54.5" />
+    <!-- Vertical Connector -->
+    <polygon points="118.5,79.5 140,92.5 140,117.5 118.5,105" />
+    <!-- Middle Ribbon -->
+    <polygon points="75,80 140,117.5 140,143 118.5,155.5 118.5,130.5 75,105.5" />
+    <!-- Bottom Ribbon -->
+    <polygon points="53,118.5 118.5,156.5 96.5,169 53,144" />
+  </g>
+</svg>
