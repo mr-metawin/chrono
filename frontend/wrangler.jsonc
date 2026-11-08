@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "chrono",
+  "compatibility_date": "2024-11-01",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "dist",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  }
+}
