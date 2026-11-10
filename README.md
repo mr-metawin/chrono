@@ -27,17 +27,27 @@ Chrono is an onchain time-locked savings vault for the native BOT currency on th
 
 ## Network & Deployment Information
 
-- **Network**: BOT Testnet
-- **Chain ID**: `968`
-- **RPC URL**: `https://rpc.bohr.life`
+### BOT Mainnet (Production)
+- **Network**: BOT Mainnet
+- **Chain ID**: `677`
+- **RPC URL**: `https://rpc.botchain.ai`
 - **Native Currency**: BOT (18 decimals)
-- **Explorer**: `https://scan.bohr.life`
-- **Deployed Contract Address**: [`0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b`](https://scan.bohr.life/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b)
-- **Deployment Transaction**: [`0xd36006e94a5b1b80e1a933e662ad87c17176c11e5951716a51ed9ddf930b728c`](https://scan.bohr.life/tx/0xd36006e94a5b1b80e1a933e662ad87c17176c11e5951716a51ed9ddf930b728c)
+- **Total Supply**: 150 Million
+- **Explorer**: `https://scan.botchain.ai`
+- **Deployed Contract Address**: [`0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b`](https://scan.botchain.ai/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b)
+- **Deployment Transaction**: [`0xe02a4d7fd529a477f077603a247c11c3d108b7832d023c337b621147a49beea6`](https://scan.botchain.ai/tx/0xe02a4d7fd529a477f077603a247c11c3d108b7832d023c337b621147a49beea6)
+- **Contract Verification**: Verified on [BOTScan](https://scan.botchain.ai/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b#code)
 - **Penalty Recipient**: `0x44c0B36FA1a67eec472fF0AB032eC066847AAE1d`
 - **Penalty Rate**: `1000` bps (10%)
 - **Min Lock Duration**: `120` seconds (2 minutes)
 - **Max Lock Duration**: `157680000` seconds (5 years)
+
+### BOT Testnet
+- **Network**: BOT Testnet
+- **Chain ID**: `968`
+- **RPC URL**: `https://rpc.bohr.life`
+- **Explorer**: `https://scan.bohr.life`
+- **Contract Address**: [`0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b`](https://scan.bohr.life/address/0x0EA3c89F9f9A1dCdE0e5966D2e596E5985f8de3b)
 
 ---
 

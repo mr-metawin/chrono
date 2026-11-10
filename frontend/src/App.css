@@ -1267,27 +1267,294 @@ body {
 /* Footer */
 .chrono-footer {
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 1.2rem 2rem;
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+  padding: 2.5rem 1.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+  background: rgba(9, 11, 20, 0.85);
+  backdrop-filter: blur(12px);
+  width: 100%;
+}
+
+/* --- Section 1: Proof on bot mainnet --- */
+.footer-proof-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 700px;
+  padding-bottom: 24px;
+}
+
+.footer-proof-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.proof-status-dot {
+  color: var(--color-success);
+  font-size: 11px;
+}
+
+.proof-heading {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-success);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-info-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.proof-info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.proof-label {
+  color: var(--text-dim);
+}
+
+.proof-value {
+  color: var(--color-accent);
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.proof-info-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.proof-contract-link {
+  color: var(--color-accent);
+  font-family: monospace;
+  font-size: 12px;
+  text-decoration: none;
+  background: rgba(18, 22, 44, 0.7);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  transition: all 0.2s ease;
+  word-break: break-all;
+}
+
+.proof-contract-link:hover {
+  color: #ffffff;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+  text-decoration: underline;
+}
+
+.footer-links-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.footer-external-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.footer-external-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  transform: translateY(-1px);
+}
+
+.footer-links-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Section 2: Part of the Ecosystem --- */
+.ecosystem-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+  margin-top: 16px;
+  padding-top: 28px;
+  border-top: 1px dashed rgba(139, 92, 246, 0.2);
+}
+
+.ecosystem-header-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.ecosystem-logo-circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, rgba(9, 11, 20, 0.95) 75%);
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 
+    0 0 0 5px rgba(139, 92, 246, 0.08),
+    0 0 24px rgba(139, 92, 246, 0.25),
+    inset 0 0 14px rgba(139, 92, 246, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ecosystem-logo-circle:hover {
+  transform: scale(1.06);
+  border-color: var(--color-accent);
+  box-shadow: 
+    0 0 0 7px rgba(56, 189, 248, 0.15),
+    0 0 32px rgba(56, 189, 248, 0.4);
+}
+
+.ecosystem-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.ecosystem-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ecosystem-title-bot {
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.ecosystem-title-chain {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.ecosystem-tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  font-weight: 400;
+  max-width: 480px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.ecosystem-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ecosystem-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.3) 60%, rgba(236, 72, 153, 0.5) 100%);
+}
+
+.ecosystem-divider-line:last-child {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.5) 0%, rgba(139, 92, 246, 0.3) 40%, transparent 100%);
+}
+
+.ecosystem-divider-diamond {
+  color: #ec4899;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(236, 72, 153, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ecosystem-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.ecosystem-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 10px;
+  background: rgba(18, 22, 44, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.25s ease;
+}
+
+.ecosystem-link:hover {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.18);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
+}
+
+.ecosystem-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.ecosystem-copyright {
   font-size: 0.8rem;
   color: var(--text-dim);
-  background: rgba(9, 11, 20, 0.6);
-}
-
-.footer-link {
-  color: var(--text-muted);
-  text-decoration: none;
-}
-
-.footer-link:hover {
-  color: #ffffff;
-}
-
-.footer-sep {
-  margin: 0 0.5rem;
+  text-align: center;
 }
 
 /* Responsive adjustments */

@@ -9,7 +9,7 @@ import {
 import {
   contractAddress,
   chronoAbi,
-  botTestnet,
+  botMainnet,
 } from './contracts';
 import { LockItem, LockStatus, TxStatus, VaultConstants } from './types';
 import {
@@ -22,11 +22,12 @@ import {
   parseContractError,
 } from './utils';
 import chronoLogo from './assets/chrono.jpeg';
+import botLogo from './assets/botchainlogo_transparent.png';
 
-// Public client connected to Bohr BOT Testnet
+// Public client connected to BOT Mainnet
 const publicClient = createPublicClient({
-  chain: botTestnet,
-  transport: http('https://rpc.bohr.life'),
+  chain: botMainnet,
+  transport: http('https://rpc.botchain.ai'),
 });
 
 // Circular Progress Component
@@ -135,8 +136,8 @@ export const App: React.FC = () => {
   // Collapsible FAQ
   const [faqOpen, setFaqOpen] = useState<boolean>(false);
 
-  const isCorrectChain = chainId === botTestnet.id;
-  const explorerBaseUrl = 'https://scan.bohr.life';
+  const isCorrectChain = chainId === botMainnet.id;
+  const explorerBaseUrl = 'https://scan.botchain.ai';
 
   // Effective current blockchain time (combines browser clock with calibrated offset)
   const effectiveChainNow = useMemo(() => {
@@ -214,14 +215,14 @@ export const App: React.FC = () => {
   }, []);
 
   // Switch or Add network action
-  const switchToBotTestnet = async () => {
+  const switchToBotMainnet = async () => {
     if (!window.ethereum) return;
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x3c8' }], // 968 in hex
+        params: [{ chainId: '0x2a5' }], // 677 in hex
       });
-      setChainId(968);
+      setChainId(677);
     } catch (switchError: any) {
       if (switchError.code === 4902 || switchError?.data?.originalError?.code === 4902) {
         try {
@@ -229,21 +230,21 @@ export const App: React.FC = () => {
             method: 'wallet_addEthereumChain',
             params: [
               {
-                chainId: '0x3c8',
-                chainName: 'BOT Testnet',
+                chainId: '0x2a5',
+                chainName: 'BOT Mainnet',
                 nativeCurrency: {
                   name: 'BOT',
                   symbol: 'BOT',
                   decimals: 18,
                 },
-                rpcUrls: ['https://rpc.bohr.life'],
-                blockExplorerUrls: ['https://scan.bohr.life'],
+                rpcUrls: ['https://rpc.botchain.ai'],
+                blockExplorerUrls: ['https://scan.botchain.ai'],
               },
             ],
           });
-          setChainId(968);
+          setChainId(677);
         } catch (addError) {
-          console.error('Failed to add BOT Testnet:', addError);
+          console.error('Failed to add BOT Mainnet:', addError);
         }
       } else {
         console.error('Failed to switch network:', switchError);
@@ -272,13 +273,13 @@ export const App: React.FC = () => {
     const currentChain = parseInt(currentChainHex, 16);
     setChainId(currentChain);
 
-    if (currentChain !== botTestnet.id) {
-      await switchToBotTestnet();
+    if (currentChain !== botMainnet.id) {
+      await switchToBotMainnet();
     }
 
     const client = createWalletClient({
       account: activeAccount,
-      chain: botTestnet,
+      chain: botMainnet,
       transport: custom(window.ethereum),
     });
 
@@ -855,7 +856,7 @@ export const App: React.FC = () => {
         <div className="header-meta">
           <div className="network-indicator">
             <span className={`pulse-dot ${isCorrectChain ? 'active' : 'warn'}`} />
-            <span className="network-name">BOT Testnet (968)</span>
+            <span className="network-name">BOT Mainnet (677)</span>
           </div>
 
           {account ? (
@@ -879,10 +880,10 @@ export const App: React.FC = () => {
       {account && !isCorrectChain && (
         <div className="warning-banner">
           <div className="warning-text">
-            <span>⚠️ Wallet is connected to the wrong network. Chrono operates on BOT Testnet (Chain ID 968).</span>
+            <span>⚠️ Wallet is connected to the wrong network. Chrono operates on BOT Mainnet (Chain ID 677).</span>
           </div>
-          <button className="btn btn-sm btn-warn" onClick={switchToBotTestnet}>
-            Switch to BOT Testnet
+          <button className="btn btn-sm btn-warn" onClick={switchToBotMainnet}>
+            Switch to BOT Mainnet
           </button>
         </div>
       )}
@@ -904,7 +905,7 @@ export const App: React.FC = () => {
                 rel="noreferrer"
                 className="tx-explorer-link"
               >
-                View on BohrScan ↗
+                View on BOTScan ↗
               </a>
             )}
           </div>
@@ -1252,7 +1253,7 @@ export const App: React.FC = () => {
             {loadingLocks ? (
               <div className="empty-locks-state card-glass">
                 <div className="loader-spinner" />
-                <p>Loading your time-locked positions from BOT Testnet...</p>
+                <p>Loading your time-locked positions from BOT Mainnet...</p>
               </div>
             ) : displayedLocks.length === 0 ? (
               <div className="empty-locks-state card-glass">
@@ -1567,7 +1568,7 @@ export const App: React.FC = () => {
                   <p>
                     Chrono has no owner keys, no pause switches, and no proxy upgradeability. Even the contract deployer cannot unlock your Strict savings early.
                     <br />
-                    <em>Notice: Chrono is currently running as a testnet demo on BOT Testnet and has not been audited by a formal security firm.</em>
+                    <em>Notice: Chrono is deployed on the BOT Mainnet (Chain ID 677) as a trustless, time-locked savings vault.</em>
                   </p>
                 </div>
               </div>
@@ -1578,27 +1579,108 @@ export const App: React.FC = () => {
 
       {/* Footer */}
       <footer className="chrono-footer">
-        <div className="footer-left">
-          <span>Chrono Vault • Time-locked. Temptation-proof.</span>
+        {/* Section 1: Proof on bot mainnet */}
+        <div className="footer-proof-section">
+          <div className="footer-proof-badge">
+            <span className="proof-status-dot">●</span>
+            <span className="proof-heading">Proof on bot mainnet</span>
+          </div>
+
+          <div className="proof-info-grid">
+            <div className="proof-info-item">
+              <span className="proof-label">Chain id:</span>
+              <span className="proof-value">677</span>
+            </div>
+            <div className="proof-info-sep">•</div>
+            <div className="proof-info-item">
+              <span className="proof-label">Contract:</span>
+              <a
+                href={`https://scan.botchain.ai/address/${contractAddress}`}
+                target="_blank"
+                rel="noreferrer"
+                className="proof-contract-link"
+              >
+                {contractAddress}
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-links-row">
+            <a
+              href="https://www.botchain.ai/en/"
+              target="_blank"
+              rel="noreferrer"
+              className="footer-external-link"
+            >
+              BOT Chain Website
+            </a>
+            <span className="footer-links-sep">•</span>
+            <a
+              href="https://scan.botchain.ai/"
+              target="_blank"
+              rel="noreferrer"
+              className="footer-external-link"
+            >
+              BOTScan explorer
+            </a>
+          </div>
         </div>
-        <div className="footer-right">
-          <a
-            href={`https://scan.bohr.life/address/${contractAddress}`}
-            target="_blank"
-            rel="noreferrer"
-            className="footer-link"
-          >
-            Contract: {shortenAddress(contractAddress)} ↗
-          </a>
-          <span className="footer-sep">•</span>
-          <a
-            href="https://scan.bohr.life"
-            target="_blank"
-            rel="noreferrer"
-            className="footer-link"
-          >
-            BohrScan Explorer ↗
-          </a>
+
+        {/* Section 2: Part of the Ecosystem */}
+        <div className="ecosystem-section">
+          <div className="ecosystem-header-label">PART OF THE ECOSYSTEM</div>
+
+          <div className="ecosystem-logo-circle">
+            <img src={botLogo} alt="BOT Chain Logo" className="ecosystem-logo" />
+          </div>
+
+          <h3 className="ecosystem-title">
+            <span className="ecosystem-title-bot">BOT</span>
+            <span className="ecosystem-title-chain"> Chain</span>
+          </h3>
+
+          <p className="ecosystem-tagline">
+            Time-locked. Temptation-proof.
+          </p>
+
+          <div className="ecosystem-divider">
+            <span className="ecosystem-divider-line" />
+            <span className="ecosystem-divider-diamond">◆</span>
+            <span className="ecosystem-divider-line" />
+          </div>
+
+          <div className="ecosystem-links">
+            <a
+              href="https://www.botchain.ai/en/"
+              target="_blank"
+              rel="noreferrer"
+              className="ecosystem-link"
+            >
+              <svg className="ecosystem-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              <span>botchain.ai</span>
+            </a>
+
+            <a
+              href="https://scan.botchain.ai/"
+              target="_blank"
+              rel="noreferrer"
+              className="ecosystem-link"
+            >
+              <svg className="ecosystem-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <span>Explorer</span>
+            </a>
+          </div>
+
+          <div className="ecosystem-copyright">
+            © 2026 <strong>BOT Chain</strong> · Mainnet · Chain ID <strong>677</strong>
+          </div>
         </div>
       </footer>
     </div>
